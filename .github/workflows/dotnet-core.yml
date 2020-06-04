@@ -27,11 +27,11 @@ jobs:
         dir
         dotnet build --configuration Release --no-restore
     - name: Deploy
-      run: dotnet publish -r win-x64 -c Release --self-contained
+      run: dotnet publish -r win-x64 -c Release --p:PublishSingleFile=true
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
           # Artifact name
-        name: exe-x64
+        name: POwerOffTimer-exe-x64
           # Directory containing files to upload
-        path: src\PowerOffTimer\bin\Release\netcoreapp3.1\win-x64\publish\PowerOffTimer.exe
+        path: src\PowerOffTimer\bin\Release\netcoreapp3.1\win-x64\publish\PowerOffTimer.exe -p:VersionSuffix="$(git rev-list --count HEAD)
