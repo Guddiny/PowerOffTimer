@@ -12,7 +12,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest]
+        os: [windows-latest]
 
     steps:
     - uses: actions/checkout@v2
@@ -24,3 +24,12 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
+    - name: Deploy
+      run: dotnet publish -r win-x64 -c Release --self-contained
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+          # Artifact name
+        name: wqe
+          # Directory containing files to upload
+        path: \src\PowerOffTimer\bin\Release\netcoreapp3.1\win-x64\publish
