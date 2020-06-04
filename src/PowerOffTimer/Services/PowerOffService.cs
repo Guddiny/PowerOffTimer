@@ -13,10 +13,25 @@ namespace PowerOffTimer.Services
         private DateTime _currentTime;
         private bool _isInProgress;
         private Timer _timer;
+        private double _secondsPassed;
+        private double _totalSeconds;
 
         private DateTime GetInitialDate()
         {
             return new DateTime(1990, 1, 1, 0, 0, 0);
+        }
+
+
+        public double SecondsPassed
+        {
+            get => _secondsPassed;
+            set => this.RaiseAndSetIfChanged(ref _secondsPassed, value);
+        }
+
+        public double TotalSeconds
+        {
+            get => _totalSeconds;
+            set => this.RaiseAndSetIfChanged(ref _totalSeconds, value);
         }
 
         public DateTime ScheduledTime
@@ -46,11 +61,15 @@ namespace PowerOffTimer.Services
 
             IsInProgress = true;
             CurrentTime = GetInitialDate();
+
+            TotalSeconds = (ScheduledTime - CurrentTime).TotalSeconds;
+            SecondsPassed = 0;
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             CurrentTime = CurrentTime.AddSeconds(1);
+            SecondsPassed++;
 
             if (CurrentTime >= ScheduledTime)
             {
@@ -68,6 +87,7 @@ namespace PowerOffTimer.Services
         {
             _timer.Stop();
             CurrentTime = GetInitialDate();
+            SecondsPassed = 0;
             IsInProgress = false;
         }
 

@@ -32,6 +32,6 @@ jobs:
       uses: actions/upload-artifact@v1.0.0
       with:
           # Artifact name
-        name: POwerOffTimer-exe-x64
+        name: PowerOffTimer-exe-x64
           # Directory containing files to upload
         path: src\PowerOffTimer\bin\Release\netcoreapp3.1\win-x64\publish\PowerOffTimer.exe 

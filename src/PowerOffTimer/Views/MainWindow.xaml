@@ -16,19 +16,42 @@
     <vm:MainWindowViewModel/>
   </Design.DataContext>
 
-	<Window.Resources>
-		<local:TimeToNumberConverter x:Key="TimeToNumberConverter"></local:TimeToNumberConverter>
-	</Window.Resources>
+  <Window.Resources>
+    <local:TimeToNumberConverter x:Key="TimeToNumberConverter"></local:TimeToNumberConverter>
+  </Window.Resources>
 
   <Window.Styles>
     <Style Selector="Button">
       <Setter Property="MinHeight" Value="30"></Setter>
+      <Setter Property="BorderThickness" Value="0"></Setter>
+      <Setter Property="Background" Value="White"></Setter>
+    </Style>
+
+    <Style Selector="Button:disabled">
+      <Setter Property="Opacity" Value="0.2"></Setter>
     </Style>
 
     <Style Selector="TextBox.time">
       <Setter Property="Width" Value="40"></Setter>
       <Setter Property="TextAlignment" Value="Center"></Setter>
       <Setter Property="FontSize" Value="18"></Setter>
+      <Setter Property="Foreground" Value="Blue"></Setter>
+    </Style>
+
+    <Style Selector="TextBox.time:disabled">
+      <Setter Property="Foreground" Value="Gray"></Setter>
+      <Setter Property="FontWeight" Value="Thin"></Setter>
+    </Style>
+
+   
+    <Style Selector="TextBlock.currentTime">
+      <Setter Property="Foreground" Value="Blue"></Setter>
+      <Setter Property="FontWeight" Value="SemiBold"></Setter>
+    </Style>
+
+    <Style Selector="TextBlock.currentTime:disabled">
+      <Setter Property="Foreground" Value="Gray"></Setter>
+      <Setter Property="FontWeight" Value="Thin"></Setter>
     </Style>
   </Window.Styles>
 
@@ -38,8 +61,10 @@
               VerticalAlignment="Center"
               Padding="1">
         <TextBlock Grid.Row="0"
+                 Classes="currentTime"
                  FontSize="20"
                  TextAlignment="Center"
+                 IsEnabled="{Binding PowerOffService.IsInProgress}"
                  Text="{Binding PowerOffService.CurrentTime.TimeOfDay}">
         </TextBlock>
       </Border>
@@ -52,11 +77,11 @@
               VerticalAlignment="Center">
         <StackPanel Orientation="Horizontal"
                     Spacing="5">
-          <TextBox Classes="time" Text="{Binding Hours}"/>
+          <TextBox Classes="time" Text="{Binding Hours}" Watermark="HH"/>
           <TextBlock VerticalAlignment="Center" Text=":"/>
-          <TextBox Classes="time" Text="{Binding Minutes}"/>
+          <TextBox Classes="time" Text="{Binding Minutes}" Watermark="MM"/>
           <TextBlock VerticalAlignment="Center" Text=":"/>
-          <TextBox Classes="time" Text="{Binding Seconds}"/>
+          <TextBox Classes="time" Text="{Binding Seconds}" Watermark="SS"/>
         </StackPanel>
       </Border>
     </Border>
@@ -84,7 +109,9 @@
                  Grid.Column="0"
                  Grid.ColumnSpan="2"
                  Minimum="0"
-                 Maximum="100"
+                 Maximum="{Binding PowerOffService.TotalSeconds}"
+                 SmallChange="1"
+                 Value="{Binding PowerOffService.SecondsPassed}"
                  MinHeight="12"/>
   </Grid>
 
