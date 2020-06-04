@@ -1,0 +1,36 @@
+﻿<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:PowerOffTimer"
+             x:Class="PowerOffTimer.App">
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
+        <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
+
+      <Style>
+        <Style.Resources>
+          <DrawingGroup x:Key="VSImageLib.StatusOffline_stop_16x"  >
+            <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+            <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M8,10.8281L5,13.8281 2.172,11.0001 5.172,8.0001 2.172,5.0001 5,2.1721 8,5.1721 11,2.1721 13.828,5.0001 10.828,8.0001 13.828,11.0001 11,13.8281z" />
+            <GeometryDrawing Brush="#FFA1260D" Geometry="F1M9.4141,8L12.4141,11 11.0001,12.414 8.0001,9.414 5.0001,12.414 3.5861,11 6.5861,8 3.5861,5 5.0001,3.586 8.0001,6.586 11.0001,3.586 12.4141,5z" />
+          </DrawingGroup>
+          <DrawingGroup x:Key="VSImageLib.StatusStop_16x"  >
+            <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+            <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M0,8C0,3.582 3.582,0 8,0 12.418,0 16,3.582 16,8 16,12.418 12.418,16 8,16 3.582,16 0,12.418 0,8" />
+            <GeometryDrawing Brush="#FFE41400" Geometry="F1M11,11L5,11 5,5 11,5z M8,1C4.135,1 1,4.134 1,8 1,11.865 4.135,15 8,15 11.865,15 15,11.865 15,8 15,4.134 11.865,1 8,1" />
+            <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1M11,11L5,11 5,5 11,5z" />
+          </DrawingGroup>
+          <DrawingGroup x:Key="VSImageLib.Restart_16x"  >
+            <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+            <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M16,8C16,12.411 12.411,16 8,16 5.314,16 2.822,14.663 1.333,12.425L0.779999999999999,11.592 4.112,9.377 4.666,10.21C5.41,11.331 6.656,12 8,12 10.206,12 12,10.206 12,8 12,5.794 10.206,4 8,4L8,8 0,8 0,0 4,0 4,1.088C5.212,0.384 6.597,0 8,0 12.411,0 16,3.589 16,8" />
+            <GeometryDrawing Brush="#FF424242" Geometry="F1M8,1C6.076,1,4.291,1.801,3,3.121L3,1 1,1 1,7 7,7 7,5 4.002,5C4.93,3.766 6.401,3 8,3 10.757,3 13,5.243 13,8 13,10.757 10.757,13 8,13 6.321,13 4.763,12.164 3.833,10.764L2.167,11.871C3.469,13.83 5.649,15 8,15 11.859,15 15,11.859 15,8 15,4.14 11.859,1 8,1" />
+          </DrawingGroup>
+          <GeometryDrawing x:Key="VSCodeLight.debug-start" Brush="#388A34" Geometry="M4 2.00005V13.82L13 7.88006L4 2.00005ZM5.5 4.82L10.3101 7.88006L5.5 11.0001V4.82Z"   />
+        </Style.Resources>
+      </Style>
+      
+    </Application.Styles>
+</Application>

@@ -1,0 +1,91 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:PowerOffTimer.ViewModels;assembly=PowerOffTimer"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:PowerOffTimer.Converters;assembly=PowerOffTimer"
+        mc:Ignorable="d"
+        Width="205"
+        MinHeight="110"
+        Height="110"
+        x:Class="PowerOffTimer.Views.MainWindow"
+        Icon="/Assets/logo.ico"
+        Title="Timer">
+
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
+
+	<Window.Resources>
+		<local:TimeToNumberConverter x:Key="TimeToNumberConverter"></local:TimeToNumberConverter>
+	</Window.Resources>
+
+  <Window.Styles>
+    <Style Selector="Button">
+      <Setter Property="MinHeight" Value="30"></Setter>
+    </Style>
+
+    <Style Selector="TextBox.time">
+      <Setter Property="Width" Value="40"></Setter>
+      <Setter Property="TextAlignment" Value="Center"></Setter>
+      <Setter Property="FontSize" Value="18"></Setter>
+    </Style>
+  </Window.Styles>
+
+  <Grid RowDefinitions="*,*,*,Auto" ColumnDefinitions="*, 30">
+    <Border>
+      <Border HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Padding="1">
+        <TextBlock Grid.Row="0"
+                 FontSize="20"
+                 TextAlignment="Center"
+                 Text="{Binding PowerOffService.CurrentTime.TimeOfDay}">
+        </TextBlock>
+      </Border>
+    </Border>
+
+    <Border Grid.Row="1"
+            Grid.RowSpan="2"
+            IsEnabled="{Binding !PowerOffService.IsInProgress}">
+      <Border HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+        <StackPanel Orientation="Horizontal"
+                    Spacing="5">
+          <TextBox Classes="time" Text="{Binding Hours}"/>
+          <TextBlock VerticalAlignment="Center" Text=":"/>
+          <TextBox Classes="time" Text="{Binding Minutes}"/>
+          <TextBlock VerticalAlignment="Center" Text=":"/>
+          <TextBox Classes="time" Text="{Binding Seconds}"/>
+        </StackPanel>
+      </Border>
+    </Border>
+
+    <Button Grid.Row="0"
+            Grid.Column="1"
+            Command="{Binding StartTimer}"
+            IsEnabled="{Binding !PowerOffService.IsInProgress}">
+      <DrawingPresenter Drawing="{DynamicResource VSCodeLight.debug-start}"/>
+    </Button>
+    <Button Grid.Row="1"
+            Grid.Column="1"
+            IsEnabled="{Binding PowerOffService.IsInProgress}"
+            Command="{Binding RestartTimer}">
+      <DrawingPresenter Drawing="{DynamicResource VSImageLib.Restart_16x}"/>
+    </Button>
+    <Button Grid.Row="2"
+            Grid.Column="1"
+            IsEnabled="{Binding PowerOffService.IsInProgress}"
+            Command="{Binding StopTimer}">
+      <DrawingPresenter Drawing="{DynamicResource VSImageLib.StatusOffline_stop_16x}"/>
+    </Button>
+
+    <ProgressBar Grid.Row="3"
+                 Grid.Column="0"
+                 Grid.ColumnSpan="2"
+                 Minimum="0"
+                 Maximum="100"
+                 MinHeight="12"/>
+  </Grid>
+
+</Window>
