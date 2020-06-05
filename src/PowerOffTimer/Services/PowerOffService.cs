@@ -21,7 +21,6 @@ namespace PowerOffTimer.Services
             return new DateTime(1990, 1, 1, 0, 0, 0);
         }
 
-
         public double SecondsPassed
         {
             get => _secondsPassed;
@@ -51,7 +50,6 @@ namespace PowerOffTimer.Services
             get => _isInProgress;
             set => this.RaiseAndSetIfChanged(ref _isInProgress, value);
         }
-
 
         public void StartTimer()
         {

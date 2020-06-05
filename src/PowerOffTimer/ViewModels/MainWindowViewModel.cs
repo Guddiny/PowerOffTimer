@@ -13,8 +13,11 @@ namespace PowerOffTimer.ViewModels
 
         private TimerState _timerState;
 
-        private DateTime GenerateInitialTime(int hours, int minutes, int seconds) =>
-            new DateTime(1990, 1, 1, hours, minutes, seconds);
+        private DateTime GenerateInitialTime(int hours, int minutes, int seconds)
+        {
+            var totalSeconds = hours * 3600 + minutes * 60 + seconds;
+            return new DateTime(1990, 1, 1).AddSeconds(totalSeconds);
+        }
 
         public PowerOffService PowerOffService { get; set; }
 
