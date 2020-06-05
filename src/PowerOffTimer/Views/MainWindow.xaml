@@ -12,107 +12,104 @@
         Icon="/Assets/logo.ico"
         Title="Timer">
 
-  <Design.DataContext>
-    <vm:MainWindowViewModel/>
-  </Design.DataContext>
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
 
-  <Window.Resources>
-    <local:TimeToNumberConverter x:Key="TimeToNumberConverter"></local:TimeToNumberConverter>
-  </Window.Resources>
+	<Window.Styles>
+		<Style Selector="Button">
+			<Setter Property="MinHeight" Value="30"></Setter>
+			<Setter Property="BorderThickness" Value="0"></Setter>
+			<Setter Property="Background" Value="White"></Setter>
+		</Style>
 
-  <Window.Styles>
-    <Style Selector="Button">
-      <Setter Property="MinHeight" Value="30"></Setter>
-      <Setter Property="BorderThickness" Value="0"></Setter>
-      <Setter Property="Background" Value="White"></Setter>
-    </Style>
+		<Style Selector="Button:disabled">
+			<Setter Property="Opacity" Value="0.2"></Setter>
+		</Style>
 
-    <Style Selector="Button:disabled">
-      <Setter Property="Opacity" Value="0.2"></Setter>
-    </Style>
+		<Style Selector="TextBox.time">
+			<Setter Property="Width" Value="40"></Setter>
+			<Setter Property="TextAlignment" Value="Center"></Setter>
+			<Setter Property="FontSize" Value="18"></Setter>
+			<Setter Property="Foreground" Value="Blue"></Setter>
+		</Style>
 
-    <Style Selector="TextBox.time">
-      <Setter Property="Width" Value="40"></Setter>
-      <Setter Property="TextAlignment" Value="Center"></Setter>
-      <Setter Property="FontSize" Value="18"></Setter>
-      <Setter Property="Foreground" Value="Blue"></Setter>
-    </Style>
-
-    <Style Selector="TextBox.time:disabled">
-      <Setter Property="Foreground" Value="Gray"></Setter>
-      <Setter Property="FontWeight" Value="Thin"></Setter>
-    </Style>
+		<Style Selector="TextBox.time:disabled">
+			<Setter Property="Foreground" Value="Gray"></Setter>
+			<Setter Property="FontWeight" Value="Thin"></Setter>
+		</Style>
 
 
-    <Style Selector="TextBlock.currentTime">
-      <Setter Property="Foreground" Value="Blue"></Setter>
-      <Setter Property="FontWeight" Value="SemiBold"></Setter>
-    </Style>
+		<Style Selector="TextBlock.currentTime">
+			<Setter Property="Foreground" Value="Blue"></Setter>
+			<Setter Property="FontWeight" Value="SemiBold"></Setter>
+		</Style>
 
-    <Style Selector="TextBlock.currentTime:disabled">
-      <Setter Property="Foreground" Value="Gray"></Setter>
-      <Setter Property="FontWeight" Value="Thin"></Setter>
-    </Style>
-  </Window.Styles>
+		<Style Selector="TextBlock.currentTime:disabled">
+			<Setter Property="Foreground" Value="Gray"></Setter>
+			<Setter Property="FontWeight" Value="Thin"></Setter>
+		</Style>
+	</Window.Styles>
 
-  <Grid RowDefinitions="*,*,*,Auto" ColumnDefinitions="*, 30">
-    <Border>
-      <Border HorizontalAlignment="Center"
-              VerticalAlignment="Center"
-              Padding="1">
-        <TextBlock Grid.Row="0"
-                 Classes="currentTime"
-                 FontSize="20"
-                 TextAlignment="Center"
-                 IsEnabled="{Binding PowerOffService.IsInProgress}"
-                 Text="{Binding PowerOffService.CurrentTime.TimeOfDay}">
-        </TextBlock>
-      </Border>
-    </Border>
+	<Grid RowDefinitions="*,*,*,Auto" ColumnDefinitions="*, 30">
+		<Border>
+			<Border HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Padding="1">
+				<TextBlock Grid.Row="0"
+						 Classes="currentTime"
+						 FontSize="20"
+						 TextAlignment="Center"
+						 IsEnabled="{Binding PowerOffService.IsInProgress}"
+						 Text="{Binding PowerOffService.CurrentTime.TimeOfDay}">
+				</TextBlock>
+			</Border>
+		</Border>
 
-    <Border Grid.Row="1"
-            Grid.RowSpan="2"
-            IsEnabled="{Binding !PowerOffService.IsInProgress}">
-      <Border HorizontalAlignment="Center"
-              VerticalAlignment="Center">
-        <StackPanel Orientation="Horizontal"
-                    Spacing="5">
-          <TextBox Classes="time" Text="{Binding Hours}" MaxLength="2" Watermark="HH"/>
-          <TextBlock VerticalAlignment="Center" Text=":"/>
-          <TextBox Classes="time" Text="{Binding Minutes}" MaxLength="2" Watermark="MM"/>
-          <TextBlock VerticalAlignment="Center" Text=":"/>
-          <TextBox Classes="time" Text="{Binding Seconds}" MaxLength="2" Watermark="SS"/>
-        </StackPanel>
-      </Border>
-    </Border>
+		<Border Grid.Row="1"
+				Grid.RowSpan="2"
+				IsEnabled="{Binding !PowerOffService.IsInProgress}">
+			<Border HorizontalAlignment="Center"
+					VerticalAlignment="Center">
+				<StackPanel Orientation="Horizontal"
+							Spacing="5">
+					<TextBox Classes="time" Text="{Binding Hours}" MaxLength="2" Watermark="HH"/>
+					<TextBlock VerticalAlignment="Center" Text=":"/>
+					<TextBox Classes="time" Text="{Binding Minutes}" MaxLength="2" Watermark="MM"/>
+					<TextBlock VerticalAlignment="Center" Text=":"/>
+					<TextBox Classes="time" Text="{Binding Seconds}" MaxLength="2" Watermark="SS"/>
+				</StackPanel>
+			</Border>
+		</Border>
 
-    <Button Grid.Row="0"
-            Grid.Column="1"
-            Command="{Binding StartTimer}"
-            IsEnabled="{Binding !PowerOffService.IsInProgress}">
-      <DrawingPresenter Drawing="{DynamicResource VSCodeLight.debug-start}"/>
-    </Button>
-    <Button Grid.Row="1"
-            Grid.Column="1"
-            IsEnabled="{Binding PowerOffService.IsInProgress}"
-            Command="{Binding RestartTimer}">
-      <DrawingPresenter Drawing="{DynamicResource VSImageLib.Restart_16x}"/>
-    </Button>
-    <Button Grid.Row="2"
-            Grid.Column="1"
-            IsEnabled="{Binding PowerOffService.IsInProgress}"
-            Command="{Binding StopTimer}">
-      <DrawingPresenter Drawing="{DynamicResource VSImageLib.StatusOffline_stop_16x}"/>
-    </Button>
+		<Button Grid.Row="0"
+				Grid.Column="1"
+				Command="{Binding StartTimer}"
+				IsEnabled="{Binding !PowerOffService.IsInProgress}">
+			<DrawingPresenter Drawing="{DynamicResource VSCodeLight.debug-start}"/>
+		</Button>
+		<Button Grid.Row="1"
+				Grid.Column="1"
+				IsEnabled="{Binding PowerOffService.IsInProgress}"
+				Command="{Binding RestartTimer}">
+			<DrawingPresenter Drawing="{DynamicResource VSImageLib.Restart_16x}"/>
+		</Button>
+		<Button Grid.Row="2"
+				Grid.Column="1"
+				IsEnabled="{Binding PowerOffService.IsInProgress}"
+				Command="{Binding StopTimer}">
+			<DrawingPresenter Drawing="{DynamicResource VSImageLib.StatusOffline_stop_16x}"/>
+		</Button>
 
-    <ProgressBar Grid.Row="3"
-                 Grid.Column="0"
-                 Grid.ColumnSpan="2"
-                 Minimum="0"
-                 Maximum="{Binding PowerOffService.TotalSeconds}"
-                 SmallChange="1"
-                 Value="{Binding PowerOffService.SecondsPassed}"
-                 MinHeight="12"/>
-  </Grid>
+		<ProgressBar Grid.Row="3"
+					 Grid.Column="0"
+					 Grid.ColumnSpan="2"
+					 Minimum="0"
+					 IsVisible="{Binding PowerOffService.IsInProgress}"
+					 Maximum="{Binding PowerOffService.TotalSeconds}"
+					 SmallChange="1"
+					 Value="{Binding PowerOffService.SecondsPassed}"
+					 MinHeight="12"/>
+	</Grid>
 
 </Window>
