@@ -8,6 +8,8 @@
         Width="205"
         MinHeight="110"
         Height="110"
+		WindowStartupLocation="CenterScreen"
+		CanResize="False"
         x:Class="PowerOffTimer.Views.MainWindow"
         Icon="/Assets/logo.ico"
         Title="Timer">
@@ -73,11 +75,11 @@
 					VerticalAlignment="Center">
 				<StackPanel Orientation="Horizontal"
 							Spacing="5">
-					<TextBox Classes="time" Text="{Binding Hours}" MaxLength="2" Watermark="HH"/>
+					<TextBox Classes="time" Text="{Binding Hours}" Name="Hours" MaxLength="2" Watermark="HH"/>
 					<TextBlock VerticalAlignment="Center" Text=":"/>
-					<TextBox Classes="time" Text="{Binding Minutes}" MaxLength="2" Watermark="MM"/>
+					<TextBox Classes="time" Text="{Binding Minutes}" Name="Minutes" MaxLength="2" Watermark="MM"/>
 					<TextBlock VerticalAlignment="Center" Text=":"/>
-					<TextBox Classes="time" Text="{Binding Seconds}" MaxLength="2" Watermark="SS"/>
+					<TextBox Classes="time" Text="{Binding Seconds}" Name="Seconds" MaxLength="2" Watermark="SS"/>
 				</StackPanel>
 			</Border>
 		</Border>
