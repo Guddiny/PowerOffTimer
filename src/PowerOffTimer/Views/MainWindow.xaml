@@ -3,7 +3,6 @@
         xmlns:vm="clr-namespace:PowerOffTimer.ViewModels;assembly=PowerOffTimer"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:local="clr-namespace:PowerOffTimer.Converters;assembly=PowerOffTimer"
         mc:Ignorable="d"
         Width="205"
         MinHeight="110"
