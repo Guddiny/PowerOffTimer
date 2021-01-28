@@ -4,7 +4,7 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ master ]
+    branches: [ 
 
 jobs:
   build:
@@ -33,5 +33,5 @@ jobs:
       with:
           # Artifact name
         name: PowerOffTimer-Win-x64
-          # Directory containing files to upload
+          # Directory containing files to upload artifacts
         path: src\PowerOffTimer\bin\Release\net5.0\win-x64\publish
