@@ -33,5 +33,5 @@ jobs:
       with:
           # Artifact name
         name: PowerOffTimer-Win-x64
-          # Directory containing files to upload artifacts
+          # Directory containing files to upload
         path: src\PowerOffTimer\bin\Release\net5.0\win-x64\publish
