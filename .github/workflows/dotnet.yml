@@ -33,9 +33,9 @@ jobs:
     - name: Deploy
       run: dotnet publish -r win-x64 -c Release -p:PublishSingleFile=true -p:VersionSuffix="$(git rev-list --count HEAD)"
     - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v2
       with:
           # Artifact name
         name: PowerOffTimer-Win-x64
           # Directory containing files to upload artifacts
-        path: src\PowerOffTimer\bin\Release\net5.0\win-x64\publish
+        path: src\PowerOffTimer\bin\Release\net5.0\win-x64\publish\
