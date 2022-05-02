@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using PowerOffTimer.ViewModels;
@@ -11,12 +11,12 @@ namespace PowerOffTimer
 
         public IControl Build(object data)
         {
-            var name = data.GetType().FullName.Replace("ViewModel", "View");
+            string name = data.GetType().FullName!.Replace("ViewModel", "View");
             var type = Type.GetType(name);
 
             if (type != null)
             {
-                return (Control)Activator.CreateInstance(type);
+                return (Activator.CreateInstance(type) as Control)!;
             }
             else
             {

@@ -10,12 +10,13 @@ namespace PowerOffTimer.Services
         public const string FileName = "powerofftimer.cfg";
         public readonly string _path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-        public SetingsService(string path = null)
+        public SetingsService(string path)
         {
-            if (path != null)
-            {
-                _path = path;
-            }
+            _path = path;
+        }
+
+        public SetingsService()
+        {
         }
 
         public void SaveSettings(TimerState timerState)
@@ -26,12 +27,12 @@ namespace PowerOffTimer.Services
 
         public TimerState LoadSettings()
         {
-            TimerState state = null;
+            TimerState state = new();
 
             if (File.Exists(Path.Combine(_path, FileName)))
             {
                 using var streamReader = File.OpenRead(Path.Combine(_path, FileName));
-                state = JsonSerializer.Deserialize<TimerState>(streamReader);
+                state = JsonSerializer.Deserialize<TimerState>(streamReader) ?? new();
             }
 
             return state;

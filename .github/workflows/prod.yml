@@ -1,0 +1,38 @@
+name: prod
+
+on:
+  push:
+    branches: [master]
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "6.0.x"
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: |
+          dir
+          dotnet build --configuration Release --no-restore
+      - name: Publish
+        run: dotnet publish -r win-x64 -c Release -p:PublishSingleFile=true --self-contained -p:VersionSuffix="$(git rev-list --count HEAD)"
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          # Artifact name
+          name: PowerOffTimer-Win-x64
+          # Directory containing files to upload
+          path: src\PowerOffTimer\bin\Release\net5.0\win-x64\publish
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

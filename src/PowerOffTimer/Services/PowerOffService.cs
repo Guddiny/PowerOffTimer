@@ -12,9 +12,9 @@ namespace PowerOffTimer.Services
         private DateTime _scheduledTime;
         private DateTime _currentTime;
         private bool _isInProgress;
-        private Timer _timer;
         private double _secondsPassed;
         private double _totalSeconds;
+        private Timer _timer = new();
 
         private DateTime GetInitialDate()
         {
@@ -64,7 +64,7 @@ namespace PowerOffTimer.Services
             SecondsPassed = 0;
         }
 
-        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        private void Timer_Elapsed(object? sender, ElapsedEventArgs e)
         {
             CurrentTime = CurrentTime.AddSeconds(1);
             SecondsPassed++;
