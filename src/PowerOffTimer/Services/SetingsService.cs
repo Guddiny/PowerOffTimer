@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using Newtonsoft.Json;
+using System.Text.Json;
 using PowerOffTimer.Models;
 
 namespace PowerOffTimer.Services
@@ -20,11 +20,8 @@ namespace PowerOffTimer.Services
 
         public void SaveSettings(TimerState timerState)
         {
-            using (StreamWriter streamWriter = File.CreateText(Path.Combine(_path, FileName)))
-            {
-                var serializer = new JsonSerializer();
-                serializer.Serialize(streamWriter, timerState);
-            }
+            using var stream = File.Create(Path.Combine(_path, FileName));
+            JsonSerializer.Serialize(stream, timerState);
         }
 
         public TimerState LoadSettings()
@@ -33,11 +30,8 @@ namespace PowerOffTimer.Services
 
             if (File.Exists(Path.Combine(_path, FileName)))
             {
-                using (StreamReader streamReader = File.OpenText(Path.Combine(_path, FileName)))
-                {
-                    var serializser = new JsonSerializer();
-                    state = (TimerState)serializser.Deserialize(streamReader, typeof(TimerState));
-                }
+                using var streamReader = File.OpenRead(Path.Combine(_path, FileName));
+                state = JsonSerializer.Deserialize<TimerState>(streamReader);
             }
 
             return state;
