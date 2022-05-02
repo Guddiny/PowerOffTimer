@@ -1,0 +1,14 @@
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  release:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest]
+
+    steps:
+      - name: Print
+      - run: echo "Release"

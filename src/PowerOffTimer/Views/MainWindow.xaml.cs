@@ -34,17 +34,17 @@ namespace PowerOffTimer.Views
 #endif
         }
 
-        private void SecondsTextBox_PointerWheelChanged(object sender, PointerWheelEventArgs e)
+        private void SecondsTextBox_PointerWheelChanged(object? sender, PointerWheelEventArgs e)
         {
             UpdateValue(e, SecondsTextBox);
         }
 
-        private void MinutesTextBox_PointerWheelChanged(object sender, PointerWheelEventArgs e)
+        private void MinutesTextBox_PointerWheelChanged(object? sender, PointerWheelEventArgs e)
         {
             UpdateValue(e, MinutesTextBox);
         }
 
-        private void HoursTextBox_PointerWheelChanged(object sender, PointerWheelEventArgs e)
+        private void HoursTextBox_PointerWheelChanged(object? sender, PointerWheelEventArgs e)
         {
             UpdateValue(e, HoursTextBox);
         }
